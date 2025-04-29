@@ -1,7 +1,9 @@
 {
-    "name": "Mac Music Cast",
-    "render_readme": true,
-    "domains": ["sensor", "button", "number"],
-    "homeassistant": "2023.1.0",
-    "iot_class": "local_polling"
+    "name": "MacMusiCast",
+    "content_in_root": false,
+    "domain": "macmusicast",
+    "country": "CN",
+    "zip_release": false,
+    "filename": "custom_components/macmusicast/__init__.py",
+    "render_readme": true
 } 
