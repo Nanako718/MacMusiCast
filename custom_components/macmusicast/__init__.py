@@ -16,8 +16,9 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     hass.data[DOMAIN] = {}
     return True
 
-async def async_setup_entry(hass: HomeAssistant, entry):
-    conf = entry.data
+async def async_setup_entry(hass: HomeAssistant, config_entry: config_entries.ConfigEntry):
+    """Set up Mac Music Cast from a config entry."""
+    conf = config_entry.data
     host = conf["host"]
     username = conf["username"]
     
@@ -40,13 +41,13 @@ async def async_setup_entry(hass: HomeAssistant, entry):
 
     # 注册实体
     hass.async_create_task(
-        hass.config_entries.async_forward_entry_setup(entry, "sensor")
+        hass.config_entries.async_forward_entry_setup(config_entry, "sensor")
     )
     hass.async_create_task(
-        hass.config_entries.async_forward_entry_setup(entry, "button")
+        hass.config_entries.async_forward_entry_setup(config_entry, "button")
     )
     hass.async_create_task(
-        hass.config_entries.async_forward_entry_setup(entry, "number")
+        hass.config_entries.async_forward_entry_setup(config_entry, "number")
     )
 
     async def play_pause(call):
@@ -83,4 +84,17 @@ async def async_unload_entry(hass: HomeAssistant, entry):
     await hass.config_entries.async_forward_entry_unload(entry, "button")
     await hass.config_entries.async_forward_entry_unload(entry, "number")
     
+    return True
+
+async def async_migrate_entry(hass: HomeAssistant, config_entry: config_entries.ConfigEntry):
+    """Migrate old entry."""
+    _LOGGER.debug("Migrating from version %s", config_entry.version)
+
+    if config_entry.version == 1:
+        new = {**config_entry.data}
+        config_entry.version = 2
+        hass.config_entries.async_update_entry(config_entry, data=new)
+
+    _LOGGER.info("Migration to version %s successful", config_entry.version)
+
     return True 
