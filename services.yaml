@@ -1,8 +1,9 @@
-play_pause:
-  description: 切换播放/暂停 Apple Music
-next_track:
-  description: 播放下一首
-previous_track:
-  description: 播放上一首
-update_state:
-  description: 强制刷新状态 
+macmusicast:
+  play_pause:
+    description: 切换播放/暂停 Apple Music
+  next_track:
+    description: 播放下一首
+  previous_track:
+    description: 播放上一首
+  update_state:
+    description: 强制刷新状态 
