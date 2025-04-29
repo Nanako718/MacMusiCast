@@ -1,0 +1,12 @@
+{
+  "domain": "apple_music_ssh",
+  "name": "Apple Music SSH",
+  "documentation": "https://github.com/DTZSGHNR/apple_music_ssh",
+  "dependencies": [],
+  "codeowners": ["@DTZSGHNR"],
+  "requirements": ["paramiko>=2.7.2"],
+  "version": "1.0.0",
+  "config_flow": true,
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/DTZSGHNR/apple_music_ssh/issues"
+} 
