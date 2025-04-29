@@ -1,13 +1,20 @@
 import logging
 import os
+from homeassistant import config_entries
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.typing import ConfigType
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from .ssh_client import SSHClient
 from .const import DOMAIN
 from .sensor import AppleMusicStateSensor, AppleMusicTrackSensor
+from .config_flow import MacMusicCastConfigFlow
 
 _LOGGER = logging.getLogger(__name__)
+
+async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
+    """Set up the Mac Music Cast component."""
+    hass.data[DOMAIN] = {}
+    return True
 
 async def async_setup_entry(hass: HomeAssistant, entry):
     conf = entry.data
