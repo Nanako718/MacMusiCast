@@ -14,7 +14,7 @@ async def async_setup_entry(hass, entry):
     if os.path.isfile(brand_path):
         hass.data[DOMAIN]["brand_icon"] = brand_path
 
-class AppleMusicSSHConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
+class MacMusicCastConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     VERSION = 1
 
     async def async_step_user(self, user_input=None):
@@ -35,7 +35,7 @@ class AppleMusicSSHConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 )
                 if test_result == "SSH connection test":
                     return self.async_create_entry(
-                        title=f"Apple Music SSH - {user_input['host']}",
+                        title=f"Mac Music Cast - {user_input['host']}",
                         data=user_input
                     )
                 else:
@@ -70,9 +70,9 @@ class AppleMusicSSHConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     @staticmethod
     @callback
     def async_get_options_flow(config_entry):
-        return AppleMusicSSHOptionsFlow(config_entry)
+        return MacMusicCastOptionsFlow(config_entry)
 
-class AppleMusicSSHOptionsFlow(config_entries.OptionsFlow):
+class MacMusicCastOptionsFlow(config_entries.OptionsFlow):
     def __init__(self, config_entry):
         """Initialize options flow."""
         self._config_entry = config_entry
