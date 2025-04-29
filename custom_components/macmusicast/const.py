@@ -1,1 +1,1 @@
-DOMAIN = "apple_music_ssh" 
+DOMAIN = "macmusicast" 
