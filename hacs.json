@@ -1,9 +1,5 @@
 {
-    "name": "MacMusiCast",
-    "content_in_root": false,
-    "domain": "macmusicast",
-    "country": "CN",
-    "zip_release": false,
-    "filename": "custom_components/macmusicast/__init__.py",
-    "render_readme": true
+    "name": "Mac Music Cast",
+    "render_readme": true,
+    "homeassistant": "2024.4.0"
 } 
