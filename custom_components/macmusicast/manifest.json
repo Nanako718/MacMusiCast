@@ -8,5 +8,6 @@
   "version": "1.0.0",
   "config_flow": true,
   "iot_class": "local_polling",
-  "issue_tracker": "https://github.com/Nanako718/MacMusiCast/issues"
+  "issue_tracker": "https://github.com/Nanako718/MacMusiCast/issues",
+  "platforms": ["sensor", "button", "number"]
 } 
