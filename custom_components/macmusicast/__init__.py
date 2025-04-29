@@ -69,9 +69,15 @@ async def async_setup_entry(hass: HomeAssistant, config_entry: config_entries.Co
                 client.run_command,
                 'osascript -e \'tell application "Music" to activate\''
             )
+            # 等待应用完全启动
             await hass.async_add_executor_job(
                 client.run_command,
-                'sleep 1 && osascript -e \'tell application "Music" to play\''
+                'sleep 2'
+            )
+            # 播放资料库中的音乐
+            await hass.async_add_executor_job(
+                client.run_command,
+                'osascript -e \'tell application "Music" to play playlist "资料库"\''
             )
 
     async def next_track(call):
