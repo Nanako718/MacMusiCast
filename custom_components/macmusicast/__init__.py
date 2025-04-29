@@ -51,10 +51,28 @@ async def async_setup_entry(hass: HomeAssistant, config_entry: config_entries.Co
     )
 
     async def play_pause(call):
-        await hass.async_add_executor_job(
+        # 检查 Music 应用是否正在运行
+        is_running = await hass.async_add_executor_job(
             client.run_command,
-            'osascript -e \'tell application "Music" to playpause\''
+            'osascript -e \'application "Music" is running\''
         )
+        
+        if is_running.strip() == "true":
+            # 如果正在运行，直接切换播放/暂停
+            await hass.async_add_executor_job(
+                client.run_command,
+                'osascript -e \'tell application "Music" to playpause\''
+            )
+        else:
+            # 如果未运行，先启动应用，然后等待一秒再开始播放
+            await hass.async_add_executor_job(
+                client.run_command,
+                'osascript -e \'tell application "Music" to activate\''
+            )
+            await hass.async_add_executor_job(
+                client.run_command,
+                'sleep 1 && osascript -e \'tell application "Music" to play\''
+            )
 
     async def next_track(call):
         await hass.async_add_executor_job(
